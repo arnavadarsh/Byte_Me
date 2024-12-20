@@ -91,7 +91,7 @@ Tests implemented to ensure system robustness:
 
 ## Technologies Used
 - **Java** for backend development.
-- **Swing/JavaFX** for GUI implementation.
+- **JavaFX** for GUI implementation.
 - **JUnit** for unit testing.
 - **File Handling** for data management.
 
