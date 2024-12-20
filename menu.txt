@@ -1,0 +1,5 @@
+Maggi,10.0,Snacks,true
+Chips,12.0,Snacks,true
+Coke,11.0,Beverages,true
+Pepsi,11.0,Beverages,true
+

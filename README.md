@@ -1,117 +1,118 @@
-# Byte Me! Food Ordering System
+# Byte Me! - College Canteen Food Ordering System
+
+Byte Me! is a CLI-based food ordering system developed in Java, designed to simplify food ordering and menu management within a college canteen. This system provides two types of users—Admin and Customer—with different capabilities to manage and interact with canteen orders efficiently.
 
 ## Table of Contents
+
 - [Introduction](#introduction)
 - [Features](#features)
-  - [Admin Interface](#admin-interface)
-  - [Customer Interface](#customer-interface)
-  - [Enhanced Features](#enhanced-features)
-    - [Graphical User Interface (GUI)](#graphical-user-interface-gui)
-    - [I/O Stream Management](#io-stream-management)
-    - [JUnit Testing](#junit-testing)
-- [Technologies Used](#technologies-used)
-- [Setup Instructions](#setup-instructions)
-- [How to Run](#how-to-run)
-- [Acknowledgment](#acknowledgment)
+   - [Admin Interface](#admin-interface)
+   - [Customer Interface](#customer-interface)
+- [Data Structures](#data-structures)
+- [Setup and Usage](#setup-and-usage)
+- [Additional Notes](#additional-notes)
 
 ## Introduction
-The "Byte Me!" Food Ordering System is a comprehensive application designed to simplify food ordering and management processes for a college canteen. The system includes features for both customers and admins, providing a seamless experience via Command-Line Interface (CLI) and Graphical User Interface (GUI). It also implements robust data management and testing mechanisms.
+
+Byte Me! allows:
+- **Admins** to manage menu items, orders, and generate sales reports.
+- **Customers** to browse the canteen menu, add items to their cart, place orders, and track order status.
 
 ## Features
 
 ### Admin Interface
-1. **Menu Management**
-   - Add new items: Admins can add new food items with details like price, category, and availability.
-   - Update existing items: Modify details of current menu items.
-   - Remove items: Delete discontinued items, automatically updating all pending orders containing these items to "denied".
 
-2. **Order Management**
-   - View pending orders: Orders are displayed in the order of receipt.
-   - Update order status: Track and modify orders through various stages (e.g., preparing, out for delivery).
-   - Process refunds: Handle refunds for canceled or problematic orders.
-   - Handle special requests: Allow customization (e.g., "extra spicy").
-   - Order priority: VIP customer orders are prioritized over regular orders.
+The Admin functionality is defined in the `Admin` class, which extends the `User` class. Admins have the following capabilities:
 
-3. **Report Generation**
-   - Generate daily sales reports with details like total sales, most popular items, and total orders.
+1. **Login System**:
+   - Admins can log in with predefined credentials:
+      - Email: `admin@byteme.com`
+      - Password: `admin123`
+   - Upon successful login, Admins are granted access to manage the canteen system.
+
+2. **Admin Menu Options**:
+   - **Menu Management**:
+      - **Add New Items**: Add items to the canteen menu, specifying properties such as name, price, and availability.
+      - **Update Existing Items**: Modify details like price or availability for existing menu items.
+      - **Remove Items**: Remove items from the menu; orders containing removed items are updated to reflect the change.
+
+   - **Order Management**:
+      - **View Pending Orders**: Display a list of unprocessed orders.
+      - **Update Order Status**: Change the status of orders, e.g., preparing, out for delivery.
+      - **Process Refunds**: Handle refunds for canceled orders.
+      - **Handle Special Requests**: Process any customer special requests included with orders.
+
+   - **Report Generation**:
+      - **Daily Sales Report**: Summarizes the daily sales and includes metrics like total orders and total revenue.
 
 ### Customer Interface
-1. **Customer Types**
-   - VIP: Customers can pay a fee to upgrade to VIP status for prioritized order handling.
-   - Regular: Orders are processed on a first-come-first-serve basis after VIP orders.
 
-2. **Browse Menu**
-   - View all items: Display the complete menu.
-   - Search functionality: Search by item name or keyword.
-   - Filter by category: Filter items based on type (e.g., snacks, beverages).
-   - Sort by price: Sort items in ascending/descending order by price.
+The `Customer` class allows students to interact with the menu and place orders. Customers can perform the following actions:
 
-3. **Cart Operations**
-   - Add, modify, and remove items.
-   - View total price before checkout.
-   - Complete orders with payment and delivery details.
+1. **Browse and Search Menu**:
+   - **View Menu**: View the list of available food items with details.
+   - **Filter by Category**: Optionally filter items based on predefined categories.
+   - **Search by Name**: Find specific items by entering keywords.
 
-4. **Order Tracking**
-   - Track order status in real time.
-   - Cancel orders before processing.
-   - View order history and reorder previous items.
+2. **Manage Cart**:
+   - **Add Items to Cart**: Select items and add them to the cart with specified quantities.
+   - **Modify Quantities**: Change quantities of items in the cart before checking out.
+   - **Remove Items**: Delete items from the cart.
+   - **View Total**: Calculate and display the total price for items in the cart.
 
-5. **Item Reviews**
-   - Provide and view reviews for menu items.
+3. **Order and Tracking**:
+   - **Checkout**: Complete the order by providing delivery details.
+   - **Track Order Status**: Monitor order status updates, from "order received" to "delivered."
+   - **Order History**: Review past orders for easy reordering.
 
-### Enhanced Features
+## Data Structures
 
-#### Graphical User Interface (GUI)
-- Implemented using **Swing** or **JavaFX**.
-- Features:
-  - Menu browsing with item details (name, price, availability).
-  - View pending orders with details (order number, items, status).
-- GUI-only displays data and does not modify it. All updates are managed via CLI.
-- Includes navigation buttons, tables/lists for data display, and user-friendly design.
+The system uses several Java collections for efficient data management:
+- **`ArrayList`**: Manages lists of items, orders, and cart contents.
+- **`HashMap`**: Tracks order counts for each item and handles menu data.
+- **`PriorityQueue`**: Prioritizes orders, allowing VIP orders to be handled before regular orders.
+- **`OrderQueue` Class**: Manages the sequence of orders.
 
-#### I/O Stream Management
-Implemented the following features:
-1. **Order Histories**
-   - Save order details (items, quantity, price) for each user using file handling.
+## Additional Notes
 
-2. **User Management**
-   - Retrieve existing user data or register new users via file operations.
-   - Handle both existing and new user data efficiently.
+- **Predefined Credentials**: Admin users log in with the credentials specified in the code.
+- **Error Handling**: Basic input validation ensures that incorrect options are managed.
+- **No Persistent Storage**: Data resets each time the program restarts as data is not stored to a database or file.
 
-#### JUnit Testing
-Tests implemented to ensure system robustness:
-1. **Ordering Out-of-Stock Items**
-   - Verify error handling for unavailable items.
 
-2. **Invalid Login Attempts**
-   - Test responses to incorrect login credentials.
+## Setup and Usage
 
-3. **Cart Operations**
-   - Validate adding items, modifying quantities, and handling invalid inputs (e.g., negative quantities).
+1. **Compile the Program**:
+   ```bash
+   javac Main.java
+   
+## Running the Program
 
-## Technologies Used
-- **Java** for backend development.
-- **JavaFX** for GUI implementation.
-- **JUnit** for unit testing.
-- **File Handling** for data management.
+2.**To run the program, use the following command:**
+   ```bash
+   java Main
+   
+#User Authentication
 
-## Setup Instructions
-1. Clone the repository.
-2. Compile the project using your preferred IDE or command-line tool.
-3. Ensure all dependencies are properly configured.
+- **Admin Login**: Use the predefined credentials to log in as an admin:
+  - **Email**: `admin@byteme.com`
+  - **Password**: `admin123`
+- **Customer Login**: Register with an email and password to access customer features.
 
-## How to Run
-1. **CLI Module**:
-   - Navigate to the CLI module's directory.
-   - Compile the Java files using: `javac *.java`.
-   - Run the application using: `java Main`.
-2. **GUI Module**:
-   - Navigate to the GUI module's directory.
-   - Compile the Java files using: `javac *.java`.
-   - Run the application using: `java Main`.
-3. **JUnit Tests**:
-   - Use your preferred IDE or command-line tool to execute the JUnit test cases.
-   - Verify that all test cases pass.
+# Using the Admin Menu
 
-## Acknowledgment
-This project was developed as part of the **CSE201: Object-Oriented Programming** course requirements.
+After logging in, Admins can access menu options for:
+
+- Managing items
+- Processing orders
+- Generating reports
+
+# Using the Customer Interface
+
+Customers can:
+
+- Browse the menu
+- Manage their cart
+- Place orders
+- View order history
+
